@@ -16,12 +16,11 @@ public class Test {
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
         java.util.List<Report> list = Arrays.asList(
                 new Report(1, "task1", "Phome1",
-                        "Name", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now())),
-                new Report(2, "task2", "Phome2", "Name", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now())),
-                new Report(3, "task3", "Phome3", "Name", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now())));
+                        "Name", Timestamp.valueOf(LocalDateTime.now())),
+                new Report(3, "task3", "Phome3", "Name", Timestamp.valueOf(LocalDateTime.now())));
 
-        List<Lector> listLector = Arrays.asList(new Lector("Lector1", "Number"),
-                new Lector("Lector2", "Number"));
+        List<Lector> listLector = Arrays.asList(new Lector("Lector1"),
+                new Lector("Lector2"));
         ReportCreatorPDF pdf = new ReportCreatorPDF();
         for (Lector lector : listLector) {
             System.out.println(pdf.generate(list));

@@ -24,12 +24,12 @@ public class ReportCreator implements Runnable {
         //Get list all track today
         List<Report> reportList = JSONParser.fromUrlToJSON(new URL(TRACK_LIST_FOR_DAY_URL), new Report());
         //Get list of all Lectors
-        List<Lector> lectorList = JSONParser.fromUrlToJSON(new URL(LECTOR_LIST_URL), new Lector());
+        List<String> lectorList = JSONParser.fromUrlToJSON(new URL(LECTOR_LIST_URL), "");
         // createPDF();
 
         ReportCreatorPDF pdf = new ReportCreatorPDF();
         String path= Properties.REPORT_URL+ File.separator+pdf.generate(reportList);
-        for (Lector lector : lectorList) {
+        for (String nickNameLector : lectorList) {
 
         }
 //        sendReport();

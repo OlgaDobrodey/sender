@@ -23,6 +23,5 @@ public class Report {
     private String userName;
     private String nickName;
     private String task;
-    private Timestamp timeOfReport;
     private Timestamp timeOfTrack;
 }

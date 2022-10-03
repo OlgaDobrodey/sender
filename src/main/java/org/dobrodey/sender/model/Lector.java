@@ -15,7 +15,6 @@ import lombok.ToString;
 @Builder
 public class Lector {
 
-    private String name;
     private String nickName;
 
 }

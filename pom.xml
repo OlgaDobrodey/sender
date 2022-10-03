@@ -40,11 +40,23 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.13.3</version>
         </dependency>
-<!--        for create pdf-->
+<!--        pdf dependency-->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>2.0.24</version>
+        </dependency>
+<!--        for soap dependency-->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-ri</artifactId>
+            <version>2.3.1</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.3.5</version>
         </dependency>
     </dependencies>
     <build>
@@ -72,6 +84,19 @@
                     <username>admin</username>
                     <password>aston</password>
                     <path>/sender</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <wsdlUrls>
+                        <wsdlUrl>http://localhost:8081/wss/first?wsdl</wsdlUrl>
+                    </wsdlUrls>
+                    <keep>true</keep>
+                    <packageName>org.dobrodey.generate</packageName>
+                    <sourceDestDir>src/main/java</sourceDestDir>
                 </configuration>
             </plugin>
         </plugins>
