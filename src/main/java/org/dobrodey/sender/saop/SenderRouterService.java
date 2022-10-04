@@ -1,4 +1,4 @@
-package org.dobrodey.sender.service;
+package org.dobrodey.sender.saop;
 
 import org.dobrodey.generate.IOException_Exception;
 import org.dobrodey.generate.RouterSenderService;
@@ -13,12 +13,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SenderFromRouterService {
+import static org.dobrodey.sender.Properties.REPORT_URL;
 
-    private final URL url = new URL("http://localhost:8081/wss/sender?wsdl");
+public class SenderRouterService {
+
+    private final URL url = new URL(REPORT_URL+"?wsdl");
     private RouterSenderService hello;
 
-    public SenderFromRouterService() throws MalformedURLException {
+    public SenderRouterService() throws MalformedURLException {
     }
 
     public void init() {

@@ -3,6 +3,7 @@ package org.dobrodey.sender.service;
 import lombok.SneakyThrows;
 import org.dobrodey.sender.model.ReportSender;
 import org.dobrodey.sender.pdf.ReportCreatorPDF;
+import org.dobrodey.sender.saop.SenderRouterService;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,26 +11,30 @@ import java.util.List;
 
 public class ReportCreatorService implements Runnable {
 
-    @SneakyThrows
     @Override
     public void run() {
-        System.out.println("START CREATE REPORT");
-        System.out.println("INIT SERVICE");
-        SenderFromRouterService service = new SenderFromRouterService();
-        service.init();
-        System.out.println("Get list all track today");
-        //Get list all track today
-        List<ReportSender> reportList = service.getReportsToday();
-        System.out.println("generate PDF");
-        // createPDF();
-        ReportCreatorPDF pdf = new ReportCreatorPDF();
-        String path = pdf.generate(reportList);
+        try {
+            System.out.println("START CREATE REPORT");
+            System.out.println("INIT SERVICE");
+            SenderRouterService service = new SenderRouterService();
+            service.init();
 
-        byte[] pdfBytes = Files.readAllBytes(Paths.get(path));
-        System.out.println("sendReport");
-        //sendReport();
-        service.pdfForLector(pdfBytes);
+            System.out.println("GET ALL REPORTS LIST");
+            List<ReportSender> reportList = service.getReportsToday();
 
-        System.out.println("END CREATE REPORT");
+            System.out.println("CREATE PDF");
+            ReportCreatorPDF pdf = new ReportCreatorPDF();
+            String path = pdf.generate(reportList);
+
+            byte[] pdfBytes = Files.readAllBytes(Paths.get(path));
+
+            System.out.println("SEND REPORT");
+            service.pdfForLector(pdfBytes);
+
+            System.out.println("END CREATE REPORT");
+        } catch (Exception e) {
+            e.getMessage();
+            System.out.println(e.getMessage());
+        }
     }
 }

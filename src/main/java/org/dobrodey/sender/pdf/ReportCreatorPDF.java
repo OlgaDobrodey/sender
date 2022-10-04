@@ -17,8 +17,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import static java.io.File.separator;
-
 public class ReportCreatorPDF {
 
     private final String HEADER_PDF = "ASTON INTERNSHIP";
@@ -26,24 +24,20 @@ public class ReportCreatorPDF {
 
     private final String TIME_OF_TRACK_COLUMN = "TIME OF TRACK";
     private final String NAME_USER_COLIMN = "NAME_USER";
-    private final String PHONE_NUMBER_COLUMN = "PHONE_NUMBER";
     private final String TASK_COLUMN = "TASK";
 
-
     public String generate(List<ReportSender> reportList) throws IOException {
-        System.out.println("PDDocument document = new PDDocument();");
-        //generating and customizing the page
+        System.out.println("PAGE CREATE");
         PDDocument document = new PDDocument();
         PDPage firstPage = new PDPage(PDRectangle.A4);
         document.addPage(firstPage);
         int pageHeight = (int) firstPage.getTrimBox().getHeight();
 
-        System.out.println("PDPageContentStream contentStream = new PDPageContentStream(document, firstPage);");
         PDPageContentStream contentStream = new PDPageContentStream(document, firstPage);
         TextPDFCreator myTextClass = new TextPDFCreator(document, contentStream);
         PDFont font = PDType1Font.TIMES_ROMAN;
 
-        System.out.println(" myTextClass.addSingleLineText");
+        System.out.println("ADDED TEXT AND DATE");
         //adding HEADER PDF
         myTextClass.addSingleLineText(HEADER_PDF, 25, pageHeight - 100, font,
                 35, new Color(137, 207, 240));
@@ -51,6 +45,8 @@ public class ReportCreatorPDF {
         myTextClass.addSingleLineText(REPORT_TITLE_PDF, 25, pageHeight - 250, font, 16, Color.BLACK);
 
         createDateTimeTitle(pageHeight, myTextClass, font);
+
+        System.out.println("CREATE TABLE");
         TablePDFCreator myTable = createTable(document, contentStream, font, pageHeight);
 
         Color tableHeadColor = new Color(137, 207, 240);
@@ -70,7 +66,7 @@ public class ReportCreatorPDF {
 
         contentStream.close();
         String pathRecord = createReportName(Properties.REPORT_NAME);
-        System.out.println("document.save(pathRecord);");
+        System.out.println("DOCUMENT SAVE");
         document.save(pathRecord);
         document.close();
         return pathRecord;
@@ -98,6 +94,6 @@ public class ReportCreatorPDF {
     }
 
     private String createReportName(String reportName) {
-        return Properties.PATH_SAVE_REPORT + separator + reportName + "_" + LocalDate.now().getDayOfWeek().getValue() + ".pdf";
+        return reportName + "_" + LocalDate.now().getDayOfWeek().getValue() + ".pdf";
     }
 }
