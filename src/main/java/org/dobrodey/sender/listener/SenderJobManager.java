@@ -1,6 +1,6 @@
 package org.dobrodey.sender.listener;
 
-import org.dobrodey.sender.dao.ReportCreator;
+import org.dobrodey.sender.service.ReportCreatorService;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -21,12 +21,19 @@ public class SenderJobManager implements ServletContextListener {
     private final int TARGET_MIN = 0;
     private final int TARGET_SECOND = 0;
     private final long PERIOD = 24*3600; // the period between successive executions - 1 day in seconds
+    private final long PERIODTEST = 20; // the period between successive executions - 1 day in seconds
+
+//    @Override
+//    public void contextInitialized(ServletContextEvent event) {
+//        long initialDelay = getSecond(TARGET_HOUR, TARGET_MIN, TARGET_SECOND);
+//        scheduler = Executors.newSingleThreadScheduledExecutor();
+//        scheduler.scheduleAtFixedRate(new ReportCreatorService(), initialDelay, PERIOD, TimeUnit.SECONDS);
+//    }
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        long initialDelay = getSecond(TARGET_HOUR, TARGET_MIN, TARGET_SECOND);
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new ReportCreator(), initialDelay, PERIOD, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new ReportCreatorService(), 0, PERIODTEST, TimeUnit.SECONDS);
     }
 
     @Override

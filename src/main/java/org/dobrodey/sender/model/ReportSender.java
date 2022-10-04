@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,11 +18,9 @@ import java.sql.Timestamp;
 @ToString
 @Builder
 @EqualsAndHashCode
-public class Report {
+public class ReportSender {
 
-    private Integer id_report;
-    private String userName;
     private String nickName;
     private String task;
-    private Timestamp timeOfTrack;
+    private LocalDateTime timeOfTrack;
 }
