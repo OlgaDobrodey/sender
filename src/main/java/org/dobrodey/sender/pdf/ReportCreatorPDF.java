@@ -65,6 +65,10 @@ public class ReportCreatorPDF {
         }
 
         contentStream.close();
+        return documentSave(document);
+    }
+
+    private String documentSave(PDDocument document) throws IOException {
         String pathRecord = createReportName(Properties.REPORT_NAME);
         System.out.println("DOCUMENT SAVE");
         document.save(pathRecord);
