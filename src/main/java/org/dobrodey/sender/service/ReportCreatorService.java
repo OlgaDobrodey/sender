@@ -1,6 +1,5 @@
 package org.dobrodey.sender.service;
 
-import lombok.SneakyThrows;
 import org.dobrodey.sender.model.ReportSender;
 import org.dobrodey.sender.pdf.ReportCreatorPDF;
 import org.dobrodey.sender.saop.SenderRouterService;
