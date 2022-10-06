@@ -1,6 +1,6 @@
 package org.dobrodey.sender.service;
 
-import org.dobrodey.sender.model.ReportSender;
+import org.dobrodey.sender.model.Report;
 import org.dobrodey.sender.pdf.ReportCreatorPDF;
 import org.dobrodey.sender.saop.SenderRouterService;
 
@@ -19,7 +19,7 @@ public class ReportCreatorService implements Runnable {
             service.init();
 
             System.out.println("GET ALL REPORTS LIST");
-            List<ReportSender> reportList = service.getReportsToday();
+            List<Report> reportList = service.getReportsToday();
 
             System.out.println("CREATE PDF");
             ReportCreatorPDF pdf = new ReportCreatorPDF();

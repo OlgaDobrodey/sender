@@ -7,7 +7,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.dobrodey.sender.Properties;
-import org.dobrodey.sender.model.ReportSender;
+import org.dobrodey.sender.model.Report;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class ReportCreatorPDF {
     private final String NAME_USER_COLIMN = "NAME_USER";
     private final String TASK_COLUMN = "TASK";
 
-    public String generate(List<ReportSender> reportList) throws IOException {
+    public String generate(List<Report> reportList) throws IOException {
         System.out.println("PAGE CREATE");
         PDDocument document = new PDDocument();
         PDPage firstPage = new PDPage(PDRectangle.A4);
@@ -58,7 +58,7 @@ public class ReportCreatorPDF {
         myTable.addCall(TASK_COLUMN, tableHeadColor);
 
         //add records to table
-        for (ReportSender report : reportList) {
+        for (Report report : reportList) {
             myTable.addCall(report.getTimeOfTrack().toString(), tableBodyColor);
             myTable.addCall(report.getNickName(), tableBodyColor);
             myTable.addCall(report.getTask(), tableBodyColor);

@@ -21,20 +21,20 @@ public class SenderJobManager implements ServletContextListener {
     private final int TARGET_MIN = 0;
     private final int TARGET_SECOND = 0;
     private final long PERIOD = 24*3600; // the period between successive executions - 1 day in seconds
-//    private final long PERIOD_TEST = 20; // the period between successive executions - 1 day in seconds
-
-    @Override
-    public void contextInitialized(ServletContextEvent event) {
-        long initialDelay = getSecond(TARGET_HOUR, TARGET_MIN, TARGET_SECOND);
-        scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new ReportCreatorService(), initialDelay, PERIOD, TimeUnit.SECONDS);
-    }
+    private final long PERIOD_TEST = 20; // the period between successive executions - 1 day in seconds
 
 //    @Override
 //    public void contextInitialized(ServletContextEvent event) {
+//        long initialDelay = getSecond(TARGET_HOUR, TARGET_MIN, TARGET_SECOND);
 //        scheduler = Executors.newSingleThreadScheduledExecutor();
-//        scheduler.scheduleAtFixedRate(new ReportCreatorService(), 0, PERIOD_TEST, TimeUnit.SECONDS);
+//        scheduler.scheduleAtFixedRate(new ReportCreatorService(), initialDelay, PERIOD, TimeUnit.SECONDS);
 //    }
+
+    @Override
+    public void contextInitialized(ServletContextEvent event) {
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(new ReportCreatorService(), 0, PERIOD_TEST, TimeUnit.SECONDS);
+    }
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {

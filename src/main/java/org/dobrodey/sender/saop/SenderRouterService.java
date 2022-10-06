@@ -3,7 +3,7 @@ package org.dobrodey.sender.saop;
 import org.dobrodey.generate.IOException_Exception;
 import org.dobrodey.generate.RouterSenderService;
 import org.dobrodey.generate.RouterSenderServiceImplService;
-import org.dobrodey.sender.model.ReportSender;
+import org.dobrodey.sender.model.Report;
 import org.dobrodey.sender.model.Role;
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -28,15 +28,16 @@ public class SenderRouterService {
         this.hello = service.getRouterSenderServiceImplPort();
     }
 
-    public List<ReportSender> getReportsToday() {
+    public List<Report> getReportsToday() {
         return hello.getReportsToday()
                 .getItem()
                 .stream()
-                .map(report -> ReportSender.builder()
-                        .nickName(report.getNickName())
+                .map(report -> Report.builder()
+                        .nickName(report.getUserName())
                         .task(report.getTask())
                         .timeOfTrack(getTimeOfTrack(report.getTimeOfTrack()))
-                        .build()).collect(Collectors.toList());
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private static LocalDateTime getTimeOfTrack(XMLGregorianCalendar time) {

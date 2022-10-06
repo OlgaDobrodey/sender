@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -18,7 +17,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @EqualsAndHashCode
-public class ReportSender {
+public class Report {
 
     private String nickName;
     private String task;
