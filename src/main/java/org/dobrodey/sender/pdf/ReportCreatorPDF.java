@@ -1,5 +1,6 @@
 package org.dobrodey.sender.pdf;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 public class ReportCreatorPDF {
 
     private final String HEADER_PDF = "ASTON INTERNSHIP";
@@ -27,7 +29,7 @@ public class ReportCreatorPDF {
     private final String TASK_COLUMN = "TASK";
 
     public String generate(List<Report> reportList) throws IOException {
-        System.out.println("PAGE CREATE");
+        log.info("PAGE CREATE");
         PDDocument document = new PDDocument();
         PDPage firstPage = new PDPage(PDRectangle.A4);
         document.addPage(firstPage);
@@ -37,7 +39,7 @@ public class ReportCreatorPDF {
         TextPDFCreator myTextClass = new TextPDFCreator(document, contentStream);
         PDFont font = PDType1Font.TIMES_ROMAN;
 
-        System.out.println("ADDED TEXT AND DATE");
+        log.info("ADDED TEXT AND DATE");
         //adding HEADER PDF
         myTextClass.addSingleLineText(HEADER_PDF, 25, pageHeight - 100, font,
                 35, new Color(137, 207, 240));
@@ -46,7 +48,7 @@ public class ReportCreatorPDF {
 
         createDateTimeTitle(pageHeight, myTextClass, font);
 
-        System.out.println("CREATE TABLE");
+        log.info("CREATE TABLE");
         TablePDFCreator myTable = createTable(document, contentStream, font, pageHeight);
 
         Color tableHeadColor = new Color(137, 207, 240);
@@ -70,7 +72,7 @@ public class ReportCreatorPDF {
 
     private String documentSave(PDDocument document) throws IOException {
         String pathRecord = createReportName(Properties.REPORT_NAME);
-        System.out.println("DOCUMENT SAVE");
+        log.info("DOCUMENT SAVE");
         document.save(pathRecord);
         document.close();
         return pathRecord;
