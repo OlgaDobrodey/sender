@@ -14,6 +14,7 @@ public class ReportCreatorService implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println("this is second commit");
             log.info("START CREATE REPORT");
             log.info("INIT SERVICE");
             SenderRouterService service = new SenderRouterService();
