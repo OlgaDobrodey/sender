@@ -29,7 +29,7 @@ public class ReportCreatorPDF {
     private final String TASK_COLUMN = "TASK";
 
     public String generate(List<Report> reportList) throws IOException {
-        log.info("PAGE CREATE");
+        System.out.println("PAGE CREATE");
         PDDocument document = new PDDocument();
         PDPage firstPage = new PDPage(PDRectangle.A4);
         document.addPage(firstPage);
@@ -39,7 +39,7 @@ public class ReportCreatorPDF {
         TextPDFCreator myTextClass = new TextPDFCreator(document, contentStream);
         PDFont font = PDType1Font.TIMES_ROMAN;
 
-        log.info("ADDED TEXT AND DATE");
+        System.out.println("ADDED TEXT AND DATE");
         //adding HEADER PDF
         myTextClass.addSingleLineText(HEADER_PDF, 25, pageHeight - 100, font,
                 35, new Color(137, 207, 240));
@@ -48,7 +48,7 @@ public class ReportCreatorPDF {
 
         createDateTimeTitle(pageHeight, myTextClass, font);
 
-        log.info("CREATE TABLE");
+        System.out.println("CREATE TABLE!");
         TablePDFCreator myTable = createTable(document, contentStream, font, pageHeight);
 
         Color tableHeadColor = new Color(137, 207, 240);
@@ -72,7 +72,7 @@ public class ReportCreatorPDF {
 
     private String documentSave(PDDocument document) throws IOException {
         String pathRecord = createReportName(Properties.REPORT_NAME);
-        log.info("DOCUMENT SAVE");
+        System.out.println("DOCUMENT SAVE");
         document.save(pathRecord);
         document.close();
         return pathRecord;

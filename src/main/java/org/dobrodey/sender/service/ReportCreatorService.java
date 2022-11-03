@@ -14,23 +14,23 @@ public class ReportCreatorService implements Runnable {
     @Override
     public void run() {
         try {
-            log.info("START CREATE REPORT");
-            log.info("INIT SERVICE");
+            System.out.println("START CREATE REPORT");
+            System.out.println("INIT SERVICE");
             SenderRouterService service = new SenderRouterService();
             service.init();
 
-            log.info("GET ALL REPORTS LIST");
+            System.out.println("GET ALL REPORTS LIST");
             List<Report> reportList = service.getReportsToday();
-            log.info("CREATE PDF");
+            System.out.println("CREATE PDF");
             ReportCreatorPDF pdf = new ReportCreatorPDF();
             String path = pdf.generate(reportList);
 
             byte[] pdfBytes = Files.readAllBytes(Paths.get(path));
 
-            log.info("SEND REPORT");
+            System.out.println("SEND REPORT");
             service.pdfForLector(pdfBytes);
 
-            log.info("END CREATE REPORT");
+            System.out.println("END CREATE REPORT");
         } catch (Exception e) {
             e.getMessage();
             System.out.println(e.getMessage());
