@@ -30,7 +30,7 @@ public class ReportCreatorService implements Runnable {
             System.out.println("SEND REPORT");
             service.pdfForLector(pdfBytes);
 
-            System.out.println("END CREATE REPORT");
+            log.info("END CREATE REPORT!");
         } catch (Exception e) {
             e.getMessage();
             System.out.println(e.getMessage());
